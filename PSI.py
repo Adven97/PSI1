@@ -1,17 +1,19 @@
 import random
 import matplotlib.pyplot as plt
-# import matplotlib.pyplot as plt2
 import math
 import itertools
 from tabulate import tabulate
+import time
 
 a = list()
 b = list()
 cities = list()
-pointsNom = 4
+pointsNom = 9
 
-# generating and drawing points with labels
 print(" ------------------------- Zachlanny --------------------------------- ")
+start1 = time.time()
+# generating and drawing points with labels
+
 plt.subplot(2, 1, 1)
 plt.title('Zachlanny')
 
@@ -29,10 +31,11 @@ for x in range(pointsNom):
         plt.annotate(x, (a[x], b[x]))
 
 cities_tmp= cities
+cities_tmp.remove(0)
 print("tak wyglada cities: ")
 print(cities_tmp)
-### Choosing best way and closest points to go - zachłanny
 
+### Choosing best way and closest points to go - zachłanny
 
 def search_for_shortest():
     shortestWays = list()
@@ -95,28 +98,31 @@ def draw_connesctions(list_of_best_ways):
 
 draw_connesctions(bestway)
 ###   Teraz robimy Brutforce
-
+end1 = time.time()
+czas1 = end1-start1
 print(" ------------------------- Tera brutforce --------------------------------- ")
-# print("000000000000000000000000")
-# print(cities_tmp)
-comb = list(itertools.product([1,2,3], repeat=pointsNom-1))
-# sss = set(comb)
-# print(sss)
+# niestety dla brutforce max liczba wezlów to 9( 0 + 8 punktow) -> czyli 8!
+
+start2=time.time()
+cts=[]
+for x in range(pointsNom):
+    cts.append(x)
+cts.remove(0)
+
+comb = list(itertools.product(cts, repeat=pointsNom-1))  
 brave_new_list=[]
 
-counter=0
 for minilist in comb:
     min2 = set(minilist)
     if len(min2) == len(minilist):
         brave_new_list.append(minilist)
-        print(minilist)
+        #print(minilist)
         # print(min2)
-        print(">><<")
-        counter = counter+1
+        #print(">><<")
 
     
-print(brave_new_list)
-print("liczba elementow tej Listy to: "+str(counter))
+#print(brave_new_list)
+print("liczba elementow tej Listy to: "+str(len(brave_new_list)))
 
 wayss=[]
 for way in brave_new_list:
@@ -132,9 +138,9 @@ for way in brave_new_list:
             xd = (a[node] - a[nextPoint])**2 + (b[node] - b[nextPoint])**2
             cost += math.sqrt(xd)
     wayss.append(cost)
-    print("koszt calosci: "+ str(cost)+ " --> "+str(way))
+   # print("koszt calosci: "+ str(cost)+ " --> "+str(way))
         
-print(wayss)
+#print(wayss)
 print('')
 plt.subplot(2, 1, 2)
 plt.title('Brutforce')
@@ -142,7 +148,15 @@ best = brave_new_list[wayss.index(min(wayss))]
 best=list(best)
 best.insert(0, 0)
 print(best)
+print("Suma to: "+str(min(wayss)))
 draw_connesctions(best)
 
+end2 = time.time()
+czas2 = end2 - start2
+
+print("Czas zachlanny: " +str(czas1))
+print("Czas brutforca: " +str(czas2))
+
 plt.show()
+
 
