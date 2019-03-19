@@ -11,7 +11,7 @@ cities = list()
 pointsNom = 4
 
 # generating and drawing points with labels
-
+print(" ------------------------- Zachlanny --------------------------------- ")
 plt.subplot(2, 1, 1)
 plt.title('Zachlanny')
 
@@ -83,7 +83,6 @@ def search_for_shortest():
 
 bestway = search_for_shortest()
 
-
 # drawing lines betweeen points
 def draw_connesctions(list_of_best_ways):
     for xx in list_of_best_ways:
@@ -97,11 +96,11 @@ def draw_connesctions(list_of_best_ways):
 draw_connesctions(bestway)
 ###   Teraz robimy Brutforce
 
-print("tu beda kombinacje")
-print("000000000000000000000000")
-print(cities_tmp)
+print(" ------------------------- Tera brutforce --------------------------------- ")
+# print("000000000000000000000000")
+# print(cities_tmp)
 comb = list(itertools.product([1,2,3], repeat=pointsNom-1))
-sss = set(comb)
+# sss = set(comb)
 # print(sss)
 brave_new_list=[]
 
@@ -117,7 +116,7 @@ for minilist in comb:
 
     
 print(brave_new_list)
-print("liczba elementow tej tisty to: "+str(counter))
+print("liczba elementow tej Listy to: "+str(counter))
 
 wayss=[]
 for way in brave_new_list:
