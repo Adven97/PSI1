@@ -8,9 +8,9 @@ import time
 a = list()
 b = list()
 cities = list()
-pointsNom = 9
+pointsNom =10
 
-print(" ------------------------- Zachlanny --------------------------------- ")
+print(" --------------------------------------- Zachlanny ------------------------------------------------ ")
 start1 = time.time()
 # generating and drawing points with labels
 
@@ -100,28 +100,22 @@ draw_connesctions(bestway)
 ###   Teraz robimy Brutforce
 end1 = time.time()
 czas1 = end1-start1
-print(" ------------------------- Tera brutforce --------------------------------- ")
-# niestety dla brutforce max liczba wezlów to 9( 0 + 8 punktow) -> czyli 8!
+
+
+
+print(" ---------------------------------------------- Tera brutforce -------------------------------------------------- ")
+# niestety dla brutforce max liczba wezlów to 11
 
 start2=time.time()
+
 cts=[]
 for x in range(pointsNom):
     cts.append(x)
 cts.remove(0)
 
-comb = list(itertools.product(cts, repeat=pointsNom-1))  
-brave_new_list=[]
+brave_new_list= list(itertools.permutations(cts, pointsNom-1))
 
-for minilist in comb:
-    min2 = set(minilist)
-    if len(min2) == len(minilist):
-        brave_new_list.append(minilist)
-        #print(minilist)
-        # print(min2)
-        #print(">><<")
-
-    
-#print(brave_new_list)
+#print(brave_new_list)      #### jak jest dluuuuga lista to lepiej wykomentowac xD
 print("liczba elementow tej Listy to: "+str(len(brave_new_list)))
 
 wayss=[]
@@ -138,7 +132,7 @@ for way in brave_new_list:
             xd = (a[node] - a[nextPoint])**2 + (b[node] - b[nextPoint])**2
             cost += math.sqrt(xd)
     wayss.append(cost)
-   # print("koszt calosci: "+ str(cost)+ " --> "+str(way))
+    #print("koszt calosci: "+ str(cost)+ " --> "+str(way))
         
 #print(wayss)
 print('')
