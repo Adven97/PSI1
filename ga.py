@@ -8,6 +8,8 @@ list_of_chroms=[]
 list_of_dec=[]
 scores=[]
 percentes=[]
+
+chromosoms=[]
 def truncate(n):
     return int(n * 10000) / 10000
 
@@ -35,13 +37,6 @@ def chose_best(lista):
 
     indexes.append(lista.index(tmp[0]))
     indexes.append(lista.index(tmp[1]))
-    # best_pair.append(max(tmp))
-    # indexes.append(tmp.index(max(tmp)))
-    # tmp.remove(max(tmp))
-
-    # best_pair.append(max(tmp))
-    # indexes.append(lista.index(max(tmp)))
-    # tmp.remove(max(tmp))
 
     return best_pair, indexes
 
@@ -54,9 +49,11 @@ def to_binary(num):
         bin2 =str(0)+bin2
     return bin2
 
-for x in range(1, scope):
+for x in range(0, scope):
     rand = random.randint(1,amount)
     chromosom = to_binary(rand)
+    chromosoms.append(chromosom)
+
     list_of_chroms.append(chromosom)
     list_of_dec.append(rand)
     scores.append(func(rand))
@@ -96,7 +93,7 @@ for part in tm:
 print(pairs)
     
 losowe=[]    
-for x in range(100):
+for x in range(1000):
     rnd = random.random()*100
     for pair in pairs:
         if rnd >pair[0] and rnd <=pair[1]:
@@ -106,17 +103,14 @@ print()
 print(losowe)
 print()
 ocurrences=count_ocs(losowe)
-# o=ocurrences
+
 print(ocurrences)
 cb_best = chose_best(ocurrences)[0]
 cb_indx = chose_best(ocurrences)[1]
 print(cb_best)
 print(cb_indx)
-# print('-----------------')
-# print(o)
-# print('-----------------')
-# for cs in cbs:
-#     print(str(cs) + 'index:' +str(o.index(cs)) )
 
+print(chromosoms[cb_indx[0]])
+print(chromosoms[cb_indx[1]])
 
 
